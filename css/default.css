@@ -1,0 +1,81 @@
+/*edit by  luxiaoseng  with dialog plugin*/
+*{margin: 0;padding: 0}
+body{height: 100%;}
+.bDialog_alert, .bDialog_tag {
+    font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif, '\u9ed1\u4f53', 'Book Antiqua', Palatino;
+}
+/*通用样式*/
+ #bDialog_Mask{}
+.bDialog_alert div.drag{cursor:move;}
+.bDialog_alert{position: fixed;height: auto;font-family:'Microsoft Yahei', Tahoma, Arial!important;}
+.bDialog_alert>.title .close{font-family: Monaco,Menlo,Consolas,"Courier New",FontAwesome,monospace;position: absolute;right: 5px;top: 2px;cursor: pointer;width:21px; height:21px; line-height:18px;font-size:18px;color:#fff;text-align:center;font-weight: normal; /*font-family: Helvetica, STHeiti; _font-family: Tahoma, '\u9ed1\u4f53', 'Book Antiqua', Palatino;*/}
+.bDialog_alert>.title .close:hover{background:#C72015; color:#888;}
+.bDialog_alert>.title .title_text{font-size: 13px;font-weight: bolder ;height: 30px;line-height: 30px;position: absolute;width: 100%;/*background-color:#bdc6cd; background: linear-gradient(top, #edf5f8, #bdc6cd); background: -moz-linear-gradient(top, #edf5f8, #bdc6cd); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#edf5f8), to(#bdc6cd)); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#edf5f8', endColorstr='#bdc6cd'); */}
+.bDialog_alert>.content{height: auto;}
+.bDialog_alert>.content .contenttext{padding: 2px;text-align: center;font-size: 14px;overflow: hidden;height:100%  }
+.bDialog_alert>.content table{height:100% ;width:100%; text-align:center; vertical-align:middle}
+.bDialog_alert>.content table tr td{font-size:16px;color: #333;padding:15px;}
+.bDialog_alert>.loading{background: url(../img/load.gif) no-repeat center center;}
+.bDialog_alert>.content .tagimg{}
+.bDialog_tag>.content{}
+.bDialog_alert .content .contenttext input[type='text']{margin: 15px auto;height: 30px;width: 213px;}
+.bDialog_alert .content .contenttext iframe{width: 100%;height: 100%;}
+.bDialog_alert>.footer{height: 40px;position: relative;bottom: 0;width: 100%;}
+.bDialog_alert>.footer ul li{list-style: none;float: right;margin-right: 12px;padding: 6px 12px;font-size: 12px;}
+.bDialog_alert>.footer ul li:hover{cursor: pointer;}
+/*按钮样式*/
+.bDialog_alert > .footer ul li.red {background-color:red;}
+.bDialog_alert > .footer ul li.orange {background-color:#e47409;}
+.bDialog_alert > .footer ul li.blue {background-color:#089ee9;}
+.bDialog_alert > .footer ul li.coffee {background-color:#804b0f;}
+.bDialog_alert > .footer ul li.green {background-color:#008573;}
+.bDialog_alert > .footer ul li.yellow {background-color:#e9f01d;}
+/*.bDialog_alert > .footer ul li.red {background-color:red;}*/
+
+
+/*基本形态控制--默认样式  blue*/
+.bDialog_alert{
+	border:solid 5px #70cdff;
+	border-radius: 5px 5px;
+	/*box-shadow: #000 4px 4px 4px;*/
+	background-color: #fff;
+}
+.bDialog_alert>.title span{
+   color:#fff;
+}
+.bDialog_alert>.title span:hover{
+	background:#9dfcf8; 
+	color:#FFF;
+}
+.bDialog_alert>.title .title_text{
+background-color:#70cdff;
+color: #fff;
+}
+.bDialog_alert>.content{
+
+}
+.bDialog_alert>.content .contenttext{
+
+}
+.bDialog_alert>.content .tagimg{
+
+}
+.bDialog_alert .content .contenttext input[type='text']{
+	border:solid 1px #70cdff;
+}
+.bDialog_alert>.footer{
+
+}
+
+.bDialog_alert>.footer ul li{
+background-color: #70cdff;
+color: #fff;
+border:solid 1px #70cdff;
+/*text-shadow:-1px -1px 1px #1c6a9e;*/
+}
+.bDialog_alert>.footer ul li:hover{
+cursor: pointer;
+border:solid 1px #9dfcf8;
+}
+
+

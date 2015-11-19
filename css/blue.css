@@ -1,0 +1,43 @@
+
+/*基本形态控制--默认样式*/
+.bDialog_alert{
+	border:solid 3px #089ee9;
+	border-radius: 5px 5px;
+	/*box-shadow: #000 4px 4px 4px;*/
+	background-color: #fff;
+}
+.bDialog_alert>.title span{
+   color:#fff;
+}
+.bDialog_alert>.title span:hover{
+	background:rgb(228, 116, 9); color:#FFF;
+}
+.bDialog_alert>.title a{
+background-color:#089ee9;
+color: #fff;
+}
+.bDialog_alert>.content{
+
+}
+.bDialog_alert>.content .contenttext{
+
+}
+.bDialog_alert>.content .tagimg{
+
+}
+.bDialog_alert>.footer{
+
+}
+.bDialog_alert .content .contenttext input[type='text']{
+	border:solid 1px #089ee9;
+}
+.bDialog_alert>.footer ul li{
+background-color: #089ee9;
+color: #fff;
+border:solid 1px #ccc;
+/*text-shadow:-1px -1px 1px #1c6a9e;*/
+}
+.bDialog_alert>.footer ul li:hover{
+cursor: pointer;
+border:solid 1px #ffa99c;
+}

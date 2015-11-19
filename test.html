@@ -1,0 +1,245 @@
+﻿<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="css/default.css"/>
+		<link rel="stylesheet" type="text/css" href="css/theme_plain.css"/>
+		<style type="text/css">
+input{
+	width:100px;
+	height:40px;
+}
+		</style>
+	</head>
+	<script type="text/javascript" src="BDialog.js"></script>
+	<body>
+		<input type="button" onclick="testalert()" value="alert"/> 
+		<input type="button" onclick="testconfirm()" value="confirm"/> 
+		<input type="button" onclick="testmyalert()" value="myalert"/> 
+		<input type="button" onclick="testtag()" value="tag"/> 
+    <input type="button" onclick="testpromit()" value="promit"/> 
+     <input type="button" onclick="testiframe()" value="iframe"/> 
+     <input type="button" onclick="testajax()" value="ajax"/> 
+     <input type="button" onclick="testshake()" value="shake"/> 
+     <input type="button" onclick="testleftin('left')" value="leftin"/> 
+     <input type="button" onclick="testleftin('bottom')" value="bottomin"/> 
+     <input type="button" onclick="testleftin('right')" value="rightin"/> 
+     <input type="button" onclick="testleftin('top')" value="topin"/>  
+     <h2>操作说明</h2>
+     <h3>选择需要添加的模型</h3>
+      <h3>选择需要添加的模型</h3>
+       <h3>选择需要添加的模型</h3>
+        <h3>选择需要添加的模型</h3>
+         <h3>选择需要添加的模型</h3>
+          <h3>选择需要添加的模型</h3>
+           <h3>选择需要添加的模型</h3>
+            <h3>选择需要添加的模型</h3>
+             <h3>选择需要添加的模型</h3>
+              <h3>选择需要添加的模型</h3>
+               <h3>选择需要添加的模型</h3>
+                <h3>选择需要添加的模型</h3>
+                 <h3>选择需要添加的模型</h3>
+                  <h3>选择需要添加的模型</h3>
+                   <h3>选择需要添加的模型</h3>
+                    <h3>选择需要添加的模型</h3>
+                     <h3>选择需要添加的模型</h3>
+                      <h3>选择需要添加的模型</h3>
+                       <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3>
+     <div></div>
+	</body>
+
+</html>
+	<script type="text/javascript">
+//$(function(){
+	function testalert(){
+		BDialog({
+			hasTask:true,
+           taskOpcity:0.3,
+           title:"消息",
+           content:"壹钱包，专注为中国人打造生活金融服务一体化的平台，是您生活必备。",
+           drag:false,
+           hasTask:true,
+           closeFunc:function(){
+           	   BDialog({
+                content:"你竟然敢关闭我！"
+               }).tag();
+           },
+           okFunc:function(){
+           	
+           }
+
+		}).alert();
+	}
+	function testconfirm(){
+		BDialog({
+			hasTask:true,
+           taskOpcity:0.3,
+           drag:true,
+           title:"消息",
+           content:"您是否真的想删除这样一个好的金融产品，如果不愿意，请点击取消！",
+           closeFunc:function(){
+           	alert("你竟然敢关闭我！");
+           },
+           okFunc:function(){
+              BDialog({
+                content:"你点击了确认！"
+               }).tag();
+           },
+           cancleFunc:function(){
+             BDialog({
+                content:"你点击了取消！"
+             }).tag();
+           }
+
+		}).confirm();
+	}
+	function testmyalert(){
+		BDialog({
+			hasTask:true,
+           taskOpcity:0.3,
+           title:"消息",
+           drag:true,
+           content:"请不要关闭我！",
+           closeFunc:function(){
+           	//alert("你竟然敢关闭我！");
+           },
+           buttonList:{
+           	 "按钮一":{
+                   func:function(){
+                       BDialog({
+                         content:"我是按钮1！"
+                       }).tag();
+                   },
+                  className:""
+           	  },
+              "按钮二":{
+                   func:function(){
+                        BDialog({
+                         content:"我是按钮2！"
+                       }).tag();
+                   },
+                  className:"green"
+              },
+               "按钮三":{
+                   func:function(){
+                        BDialog({
+                         content:"我是按钮3！点我不关闭窗口"
+                       }).tag();
+                      return false;
+                   },
+                  className:"yellow"
+              }
+           
+           }
+		}).myAlert();
+	}
+	function testtag(){
+        BDialog({
+			     hasTask:true,
+           taskOpcity:0.4,
+           title:"消息",
+           content:"加载中...",
+           delay:2000
+		}).tag();
+
+	}
+  function testpromit(){
+        BDialog({
+           hasTask:true,
+           taskOpcity:0.8,
+           title:"消息",
+           okFunc:function(data){
+              var len=data&&data.length||0;
+              for(var i=0;i<len;i++){
+                alert(data[i].value);
+              }
+           }
+        }).prompt();
+  }
+  function testiframe(){
+      BDialog({
+           id:"hehehe",
+           hasTask:false,
+           taskOpcity:0.8,
+           title:"消息",
+           width:600,
+           height:600,
+           content:"请不要关闭我！",
+           drag:true,
+           url:"http://www.yundiaodiao.com",
+           closeFunc:function(){
+              alert("你竟然敢关闭我！");
+           },
+           okFunc:function(){
+              alert("你点击了确认！");
+           }
+
+      }).alert();
+  }
+   function testajax(){
+      BDialog({
+           hasTask:false,
+           taskOpcity:0.8,
+           title:"消息",
+           width:600,
+           height:600,
+           content:"请不要关闭我！",
+           drag:true,
+           ajax:{url:"说明.txt",type:"get",data:null},
+           closeFunc:function(){
+              alert("你竟然敢关闭我！");
+           },
+           okFunc:function(){
+              alert("你点击了确认！");
+           }
+
+      }).alert();
+  }
+ function testshake(){
+  BDialog({
+      hasTask:true,
+           taskOpcity:0.8,
+            drag:true,
+           title:"消息",
+           content:"请不要关闭我！",
+           closeFunc:function(){
+            alert("你竟然敢关闭我！");
+           },
+           okFunc:function(){
+            alert("你点击了确认！");
+           },
+           cancleFunc:function(){
+            alert("你点击了取消！");
+           }
+
+  }).prompt().shake({
+      range:9,
+      direc:"left",
+      callback:function(){
+        alert("我晃动结束了")
+      }
+    });
+
+ }
+ function testleftin(direc){
+    BDialog({
+      hasTask:true,
+           taskOpcity:0.8,
+            drag:true,
+           title:"消息",
+           content:"请不要关闭我！",
+           showType:direc+"-in",
+           closeFunc:function(){
+            alert("你竟然敢关闭我！");
+           },
+           okFunc:function(){
+            alert("你点击了确认！");
+           },
+           cancleFunc:function(){
+            alert("你点击了取消！");
+           }
+
+    }).prompt()
+ }
+
+
+	</script>
