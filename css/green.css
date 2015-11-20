@@ -13,7 +13,7 @@
 	background:#C72015;
 	 color:#FFF;
 }
-.bDialog_alert>.title a{
+.bDialog_alert>.title .title_text{
 background-color:#008573;
 color: #fff;
 }

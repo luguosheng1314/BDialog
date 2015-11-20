@@ -8,27 +8,25 @@
 (function (window, undefined) {
     var regid = /^#([\w-]*)$/,
       regClass = /^\.([\w-]*)$/,
-      regName = /^(div|a|p|ul|li|input|select|document|body|iframe)$/,
+      regName = /^(div|a|p|ul|li|input|select|document|body|iframe|span)$/,
       regWhite = /\s*/g,
       boxList = {},
       zIndex = 100000,
       index = 0, _thisDefault, funcNameToAction = {},
-      cw, ch;
-        addEvent(window, "resize", function () {
-            getWindowSize();
-        })
+      cw, ch,bodyDom=_B("body")[0];
+    getWindowSize();
    
     //#id name .class
     function _B(name, doc) {
-        var selector, match, result = [];
-        var doctemp;
-        if (doc) {
-            doctemp = (typeof doc == "object" && doc.length > 0 && doc[0] && doc[0].nodeType || doc && doc.nodeType) ? doc : _B(doc);
-        } else {
-            doctemp = document;
-        }
-        selector = name && name.replace(regWhite, "");
-        if (selector) {
+        try{
+            var selector, match, result = [];
+            var doctemp;
+            if (doc) {
+                doctemp = (typeof doc == "object" && doc.length > 0 && doc[0] && doc[0].nodeType || doc && doc.nodeType) ? doc : _B(doc);
+            } else {
+                doctemp = window.document;
+            }
+            selector = name && name.replace(regWhite, "");
             match = regid.exec(selector);
             if (match && match[1]) {
                 result = document.getElementById(match[1]);
@@ -39,13 +37,9 @@
                 var len = elems && elems.length || 0;
                 for (var i = 0; i < len; i++) {
                     var currentelem = elems[i];
-                    var classlist = currentelem.className.split(/\s+/);
-                    var classlen = classlist.length;
-                    for (var j = 0; j < classlen; j++) {
-                        if (classlist[j] == match[1]) {
-                            result.push(currentelem);
-                            break;
-                        }
+                    var reg=new RegExp("\\b"+match[1]+"\\b");
+                    if(reg.test(currentelem.className)){
+                        result.push(currentelem);
                     }
                 }
             }
@@ -53,8 +47,11 @@
             if (match && match[1]) {
                 result = doctemp.getElementsByTagName(match[1]);
             }
+            return result ? result : null;
+        }catch(e){
+            return null;
         }
-        return result ? result : null;
+        
     }
     //内置的原生ajax请求，默认是异步
     function bAjax(type, url, data, asyn, callback, beforecallback, errorcallback) {
@@ -142,10 +139,10 @@
             obj.sl = document.documentElement.scrollLeft;
             obj.st = document.documentElement.scrollTop;
         } else {
-            obj.w = document.getElementsByTagName("body")[0].clientWidth;
-            obj.h = document.getElementsByTagName("body")[0].clientHeight; 
-            obj.sl = document.getElementsByTagName("body")[0].scrollLeft;
-            obj.st = document.getElementsByTagName("body")[0].scrollTop;
+            obj.w = bodyDom.clientWidth;
+            obj.h = bodyDom.clientHeight; 
+            obj.sl =bodyDom.scrollLeft;
+            obj.st =bodyDom.scrollTop;
         }
         cw = obj.w;
         ch = obj.h;
@@ -157,24 +154,47 @@
         constructor: "BDialog",
         init: function (args) {
             this.defaultpra = {
+                //弹窗标题
                 title: "消息",
+                //弹窗内容
                 content: "",
                 tagImg: "",
+                //页面iframe嵌套连接
                 url: "",
+                //宽度
                 width: 300,
+                //高度
                 height: 130,
+                //是否有遮罩层
                 hasTask: true,
+                //遮罩层透明度
                 taskOpcity: 0.5,
+                //弹窗展示形式
                 showType: "normal",
+                //默认确定按钮文字
                 okText: "确定",
+                //默认取消按钮文字
                 cancleText: "取消",
+                //确定按钮的回调事件
                 okFunc: nofunc,
+                //取消按钮的回调事件
                 cancleFunc: nofunc,
+                //关闭弹窗的回调事件
                 closeFunc: nofunc,
+                //延迟关闭时间
                 delay: 1000,
+                // 是否开启自动关闭
+                autoClose:true,
+                //是否允许拖拽
                 drag: false,
-                buttonList: {}
-            }
+                //自定义按钮
+                buttonList: {
+                    "自定义按钮1":{
+                        func:nofunc,
+                        className:""
+                    }
+                }
+         }
             _thisDefault = this.defaultpra;
             bExtend(_thisDefault, args);
             
@@ -207,18 +227,20 @@
             this.specialpra = args;
             this.currentOpen = null;
             this.mask=null;
-            this.close = function (delay) {
+            this.close = function (delay,callback) {
                 var _this = this;
                 var _delay =
                   typeof delay == "number" ? delay : 0;
-                var bodydom = _B("body")[0]
                 setTimeout(function () {
                     if (_this.currentOpen) {
-                        _this.mask ? bodydom.removeChild(_this.mask) : null;
+                        _this.mask ? bodyDom.removeChild(_this.mask) : null;
                         _this.mask = null;
-                         bodydom.removeChild(_this.currentOpen);
+                         bodyDom.removeChild(_this.currentOpen);
                         delete boxList[_this.currentOpen.id];
                         _this.currentOpen = null;
+                        if(typeof callback=="function"){
+                            callback();
+                        }
                     }
                 }, _delay);
 
@@ -242,7 +264,7 @@
                     }
                     if (f == 0) {
                         clearInterval(si);
-                        obj && obj.callback && obj.callback(_this) || null;
+                        obj && obj.callback && obj.callback(_this);
                     }
                 }, 50);
                 return _this;
@@ -288,10 +310,6 @@
                  addEvent(window, "resize", function () {
                     _this.reposition();
                  })
-                 addEvent(window, "scroll", function () {
-                     //calcInitPosition();
-                     _this.reposition();
-                 })
             }
             this.alert = function (btnlist) {
                 var _this = this;
@@ -318,8 +336,12 @@
                 var _this = this;
                 _this.mask = _thisDefault.hasTask ? this.createMask() : null;
                 var box = this.createTag();
-                var delay = +_thisDefault.delay ? _thisDefault.delay : 1000;
-                _this.close(delay);
+                if(_thisDefault.autoClose){
+                    var delay = +_thisDefault.delay ? _thisDefault.delay : 1000;
+                    _this.close(delay,function(){
+                        _thisDefault.closeFunc();
+                    });
+                }
                 return _this;
             };
             this.prompt = function (val) {
@@ -349,7 +371,7 @@
                 return;
             }
             var maskId= "bDialog_Mask"+(+(new Date()));
-            _B("body")[0].appendChild(createDom("div", {
+            bodyDom.appendChild(createDom("div", {
                 "className": "bDialog_div",
                 "id": maskId,
                 "style.cssText": "margin:0;padding:0;position:fixed;top:0;left:0;background-color:#000;width:100%;height:100%;filter:alpha(opacity=" + this.defaultpra.taskOpcity * 100 + ");-moz-opacity:" + this.defaultpra.taskOpcity + ";opacity:" + this.defaultpra.taskOpcity + " ;z-index:" + zIndex
@@ -372,7 +394,7 @@
                     dialogId = _thisDefault.id;
                 }
             }
-            _B("body")[0].appendChild(createDom("div", {
+           bodyDom.appendChild(createDom("div", {
                 "className": "bDialog_alert",
                 "id": dialogId,
                 "style.cssText": "display:none;left:" + _thisDefault.left + "px;top:" + _thisDefault.top + "px;margin:0;padding:0;position:fixed;width:" + _thisDefault.width + "px;min-height:" + _thisDefault.height + "px;z-index:" + zIndex + 1,
@@ -473,7 +495,7 @@
             } else {
                 _thisDefault.height = _thisDefault.height + "px"
             }
-            _B("body")[0].appendChild(createDom("div", {
+           bodyDom.appendChild(createDom("div", {
                 "className": "bDialog_alert bDialog_tag",
                 "id": "bDialog_alert" + index,
                 "style.cssText": "width:250px;display:none;left:50%;margin-left:-125px;position:absolute;z-index:" + zIndex + 1,
@@ -529,5 +551,9 @@
         }
     }
     BDialog.prototype.init.prototype = BDialog.prototype;
-    window.BDialog = BDialog;
+    try{
+        exports.BDialog=BDialog
+    }catch(e){
+         window.BDialog = BDialog;
+    } 
 }(window))

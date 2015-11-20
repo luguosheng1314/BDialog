@@ -1,61 +1,107 @@
 ﻿<html>
 	<head>
+    <title>BDialog 基于原生js的轻量级弹窗组件</title>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<link rel="stylesheet" type="text/css" href="css/default.css"/>
-		<link rel="stylesheet" type="text/css" href="css/theme_plain.css"/>
+		<link rel="stylesheet" type="text/css" href="css/theme_plain.css" id="skin"/>
 		<style type="text/css">
+/**{margin: 0;padding: 0}
+body{height: 100%;}*/
+    
+    #header{
+      width:100%;
+      height:100px;
+      background-color:#eee;
+      text-align:center;
+      font-size:28px;
+      padding-top:50px;
+    }
+    #header span{font-style:italic}
+    #header p{  font-size:14px; font-weight:bold;  margin-top:20px; font-style:italic}
+    h2{width:100%; text-align:center; font-size:20px; background-color:#ccc; height:40px; line-height:40px;}
+    div.showbox{ width:100%; text-align:center; padding:20px 0; }
 input{
-	width:100px;
-	height:40px;
+  width:100px;
+  height:40px;
+  border:solid 1px #eee;
 }
+input:hover{border-color:#ccc; cursor:pointer}
+    
+
 		</style>
 	</head>
-	<script type="text/javascript" src="BDialog.js"></script>
+	
 	<body>
-		<input type="button" onclick="testalert()" value="alert"/> 
-		<input type="button" onclick="testconfirm()" value="confirm"/> 
-		<input type="button" onclick="testmyalert()" value="myalert"/> 
-		<input type="button" onclick="testtag()" value="tag"/> 
-    <input type="button" onclick="testpromit()" value="promit"/> 
-     <input type="button" onclick="testiframe()" value="iframe"/> 
-     <input type="button" onclick="testajax()" value="ajax"/> 
-     <input type="button" onclick="testshake()" value="shake"/> 
-     <input type="button" onclick="testleftin('left')" value="leftin"/> 
-     <input type="button" onclick="testleftin('bottom')" value="bottomin"/> 
-     <input type="button" onclick="testleftin('right')" value="rightin"/> 
-     <input type="button" onclick="testleftin('top')" value="topin"/>  
-     <h2>操作说明</h2>
-     <h3>选择需要添加的模型</h3>
-      <h3>选择需要添加的模型</h3>
-       <h3>选择需要添加的模型</h3>
-        <h3>选择需要添加的模型</h3>
-         <h3>选择需要添加的模型</h3>
-          <h3>选择需要添加的模型</h3>
-           <h3>选择需要添加的模型</h3>
-            <h3>选择需要添加的模型</h3>
-             <h3>选择需要添加的模型</h3>
-              <h3>选择需要添加的模型</h3>
-               <h3>选择需要添加的模型</h3>
-                <h3>选择需要添加的模型</h3>
-                 <h3>选择需要添加的模型</h3>
-                  <h3>选择需要添加的模型</h3>
-                   <h3>选择需要添加的模型</h3>
-                    <h3>选择需要添加的模型</h3>
-                     <h3>选择需要添加的模型</h3>
-                      <h3>选择需要添加的模型</h3>
-                       <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3> <h3>选择需要添加的模型</h3>
-     <div></div>
+  <div id="header">
+    <span>BDialog</span> 弹窗插件v2.1
+      <p> 作者：陆小森</p>
+</div>
+<h2>基础弹窗</h2>
+<div class="showbox">
+   <input type="button" onClick="testalert()" value="alert"/> 
+    <input type="button" onClick="testconfirm()" value="confirm"/> 
+    <input type="button" onClick="testmyalert()" value="myalert"/> 
+    <input type="button" onClick="testtag()" value="tag"/> 
+    <input type="button" onClick="testlocktag()" value="locktag"/> 
+    <input type="button" onClick="testprompt()" value="promit"/> 
+     <input type="button" onClick="testiframe()" value="iframe"/> 
+     <input type="button" onClick="testajax()" value="ajax"/> 
+</div>
+<h2>弹窗特效</h2>
+<div class="showbox">
+  <input type="button" onClick="testshake()" value="shake"/> 
+  <input type="button" onClick="testshaketop()" value="shaketop"/> 
+     <input type="button" onClick="testIn('left')" value="leftin"/> 
+     <input type="button" onClick="testIn('bottom')" value="bottomin"/> 
+     <input type="button" onClick="testIn('right')" value="rightin"/> 
+     <input type="button" onClick="testIn('top')" value="topin"/> 
+    </div>  
+<h2>皮肤</h2>
+<div class="showbox">
+  <input type="button" onClick="loadcss('theme_plain')" style="background-color:#ccc" value="纯净"/> 
+     <input type="button" onClick="loadcss('default')" style="background-color:#70cdff" value="default"/> 
+    <input type="button" onClick="loadcss('blue')" style="background-color:#089ee9" value="blue"/> 
+     <input type="button" onClick="loadcss('coffee')" style="background-color:#804b0f" value="coffee"/> 
+     <input type="button" onClick="loadcss('green')" style="background-color:#008573" value="green"/> 
+     <input type="button" onClick="loadcss('orange')" style="background-color:#fdb933" value="orange"/> 
+     <input type="button" onClick="loadcss('red')" style="background-color:#ea767d" value="red"/> 
+    <input type="button" onClick="loadcss('yellow')" style="background-color:#e9f01d" value="yellow"/> 
+    </div>
+
+
 	</body>
 
 </html>
+<script type="text/javascript" src="BDialog.js"></script>
 	<script type="text/javascript">
+    function loadcss(color){
+    //location.href=location.href.replace(/\?color=.*/,"")+"?color="+color;
+    document.getElementById("skin").setAttribute("href","css/"+color+".css");
+    var colorlist={
+       "default":"#70cdff",
+        "blue":"#089ee9",
+        "coffee":"#804b0f",
+        "green":"#008573",
+        "orange":"#fdb933",
+        "red":"#ea767d",
+        "yellow":"#e9f01d",
+        "theme_plain":"#ccc"
+    }
+    var h2= document.getElementsByTagName("h2");
+    var bgcolor=colorlist[color];
+    h2[0].style.background=bgcolor;
+     h2[1].style.background=bgcolor;
+      h2[2].style.background=bgcolor;
+    testIn('bottom');
+  }
+
 //$(function(){
 	function testalert(){
 		BDialog({
 			hasTask:true,
            taskOpcity:0.3,
            title:"消息",
-           content:"壹钱包，专注为中国人打造生活金融服务一体化的平台，是您生活必备。",
+           content:"XX钱包，专注为中国人打造生活金融服务一体化的平台，是您生活必备。",
            drag:false,
            hasTask:true,
            closeFunc:function(){
@@ -137,12 +183,40 @@ input{
 			     hasTask:true,
            taskOpcity:0.4,
            title:"消息",
-           content:"加载中...",
-           delay:2000
-		}).tag();
+           content:"交易成功",
+           delay:2000,
+           closeFunc:function(){
+               BDialog({
+                   content:"tag完成了提示，关闭"
+               }).tag();
+           }
+		    }).tag();
 
 	}
-  function testpromit(){
+  function testlocktag(){
+     BDialog({
+           hasTask:true,
+           taskOpcity:0.4,
+           title:"消息",
+           content:"交易成功",
+           autoClose:false,
+           closeFunc:function(){
+               BDialog({
+                   content:"tag完成了提示，关闭"
+               }).tag();
+           }
+        }).tag();
+  }
+  function testlocktag(){
+     BDialog({
+           hasTask:true,
+           taskOpcity:0.4,
+           title:"消息",
+           content:"加载中...",
+           autoClose:false
+     }).tag();
+  }
+  function testprompt(){
         BDialog({
            hasTask:true,
            taskOpcity:0.8,
@@ -165,12 +239,12 @@ input{
            height:600,
            content:"请不要关闭我！",
            drag:true,
-           url:"http://www.yundiaodiao.com",
+           url:"http://www.baidu.com",
            closeFunc:function(){
-              alert("你竟然敢关闭我！");
+              //alert("你竟然敢关闭我！");
            },
            okFunc:function(){
-              alert("你点击了确认！");
+              //alert("你点击了确认！");
            }
 
       }).alert();
@@ -184,7 +258,7 @@ input{
            height:600,
            content:"请不要关闭我！",
            drag:true,
-           ajax:{url:"说明.txt",type:"get",data:null},
+           ajax:{url:"../README.md",type:"get",data:null},
            closeFunc:function(){
               alert("你竟然敢关闭我！");
            },
@@ -220,7 +294,37 @@ input{
     });
 
  }
- function testleftin(direc){
+  function testshaketop(){
+ 
+     BDialog({
+      hasTask:true,
+           taskOpcity:0.8,
+            drag:true,
+           title:"消息",
+           content:"请不要关闭我！",
+           closeFunc:function(){
+            //alert("你竟然敢关闭我！");
+           },
+           okFunc:function(box,data){
+             var len=data&&data.length||0;
+              for(var i=0;i<len;i++){
+                alert(data[i].value);
+              }
+           },
+           cancleFunc:function(){
+            //alert("你点击了取消！");
+           }
+
+    }).prompt().shake({
+      range:9,
+      direc:"top",
+      callback:function(){
+        alert("我晃动结束了")
+      }
+    });
+ }
+
+ function testIn(direc){
     BDialog({
       hasTask:true,
            taskOpcity:0.8,

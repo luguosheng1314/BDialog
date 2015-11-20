@@ -1,6 +1,5 @@
 /*edit by  luxiaoseng  with dialog plugin*/
-*{margin: 0;padding: 0}
-body{height: 100%;}
+
 .bDialog_alert, .bDialog_tag {
     font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif, '\u9ed1\u4f53', 'Book Antiqua', Palatino;
 }
@@ -8,7 +7,7 @@ body{height: 100%;}
  #bDialog_Mask{}
 .bDialog_alert div.drag{cursor:move;}
 .bDialog_alert{position: fixed;height: auto;font-family:'Microsoft Yahei', Tahoma, Arial!important;}
-.bDialog_alert>.title .close{font-family: Monaco,Menlo,Consolas,"Courier New",FontAwesome,monospace;position: absolute;right: 5px;top: 2px;cursor: pointer;width:21px; height:21px; line-height:18px;font-size:18px;color:#fff;text-align:center;font-weight: normal; /*font-family: Helvetica, STHeiti; _font-family: Tahoma, '\u9ed1\u4f53', 'Book Antiqua', Palatino;*/}
+.bDialog_alert>.title .close{font:bold 20px/36px "simsun";position: absolute;right: 5px;top: 2px;cursor: pointer;width:21px; height:21px; line-height:21px;font-size:18px;color:#fff;text-align:center;font-weight: normal; /*font-family: Helvetica, STHeiti; _font-family: Tahoma, '\u9ed1\u4f53', 'Book Antiqua', Palatino;*/}
 .bDialog_alert>.title .close:hover{background:#C72015; color:#888;}
 .bDialog_alert>.title .title_text{font-size: 13px;font-weight: bolder ;height: 30px;line-height: 30px;position: absolute;width: 100%;/*background-color:#bdc6cd; background: linear-gradient(top, #edf5f8, #bdc6cd); background: -moz-linear-gradient(top, #edf5f8, #bdc6cd); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#edf5f8), to(#bdc6cd)); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#edf5f8', endColorstr='#bdc6cd'); */}
 .bDialog_alert>.content{height: auto;}

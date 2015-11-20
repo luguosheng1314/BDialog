@@ -12,7 +12,7 @@
 .bDialog_alert>.title span:hover{
 	background:#eee8ab; color:#000;
 }
-.bDialog_alert>.title a{
+.bDialog_alert>.title .title_text{
 background-color:#e9f01d;
 color: #000;
 }
