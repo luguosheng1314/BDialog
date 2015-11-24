@@ -126,25 +126,23 @@
         return new BDialog.prototype.init(args);
     }
     //获取浏览器可视区域宽高
-    function getWindowSize() {
+     function getWindowSize() {
         var obj = {};
         if (window.innerWidth) {
             obj.w = window.innerWidth;
             obj.h = window.innerHeight 
             obj.sl = document.documentElement.scrollLeft;
             obj.st=document.documentElement.scrollTop;
-        } else if (document.documentElement && document.documentElement.clientWidth) {
-            var doc=document.documentElement;
+        } else {
+            var doc=bodyDom;
+            if (document.documentElement && document.documentElement.clientWidth) {
+                doc=document.documentElement;
+            }
             obj.w = doc.clientWidth;
             obj.h = doc.clientHeight;
             obj.sl =doc.scrollLeft;
             obj.st =doc.scrollTop;
-        } else {
-            obj.w = bodyDom.clientWidth;
-            obj.h = bodyDom.clientHeight; 
-            obj.sl =bodyDom.scrollLeft;
-            obj.st =bodyDom.scrollTop;
-        }
+        } 
         cw = obj.w;
         ch = obj.h;      
         return obj;
