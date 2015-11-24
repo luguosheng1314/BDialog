@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 *BDialog2.1
 *javascript弹窗插件
 *author:陆小森
@@ -134,10 +134,11 @@
             obj.sl = document.documentElement.scrollLeft;
             obj.st=document.documentElement.scrollTop;
         } else if (document.documentElement && document.documentElement.clientWidth) {
-            obj.w = document.documentElement.clientWidth;
-            obj.h = document.documentElement.clientHeight;
-            obj.sl = document.documentElement.scrollLeft;
-            obj.st = document.documentElement.scrollTop;
+            var doc=document.documentElement;
+            obj.w = doc.clientWidth;
+            obj.h = doc.clientHeight;
+            obj.sl =doc.scrollLeft;
+            obj.st =doc.scrollTop;
         } else {
             obj.w = bodyDom.clientWidth;
             obj.h = bodyDom.clientHeight; 
@@ -145,8 +146,7 @@
             obj.st =bodyDom.scrollTop;
         }
         cw = obj.w;
-        ch = obj.h;
-       
+        ch = obj.h;      
         return obj;
     }
     BDialog.prototype = BDialog.pp = {
@@ -164,7 +164,7 @@
                 //宽度
                 width: 300,
                 //高度
-                height: 130,
+                height: 150,
                 //是否有遮罩层
                 hasTask: true,
                 //遮罩层透明度
@@ -194,8 +194,9 @@
                         className:""
                     }
                 }
-         }
+            }
             _thisDefault = this.defaultpra;
+            args=args?args:{};
             bExtend(_thisDefault, args);
             
             //默认居中显示
@@ -203,10 +204,10 @@
                 var objP = getWindowSize();
                 cw = objP.w;
                 ch = objP.h;
-                if (args.left === undefined) {
+                if (args&&undefined===args.left) {
                     _thisDefault.left = (cw - _thisDefault.width) / 2 + objP.sl;
                 }
-                if (args.top === undefined) {
+                if (args&&undefined===args.top ) {
                     _thisDefault.top = (ch - _thisDefault.height) / 2+objP.st;
                 }
             }
@@ -230,7 +231,7 @@
             this.close = function (delay,callback) {
                 var _this = this;
                 var _delay =
-                  typeof delay == "number" ? delay : 0;
+                typeof delay == "number" ? delay : 0;
                 setTimeout(function () {
                     if (_this.currentOpen) {
                         _this.mask ? bodyDom.removeChild(_this.mask) : null;
@@ -243,7 +244,6 @@
                         }
                     }
                 }, _delay);
-
             };
             this.reposition=function(){
                 calcInitPosition();
@@ -344,6 +344,11 @@
                 }
                 return _this;
             };
+             this.loading=function(){
+                var loadImg="img/load.gif";
+                _thisDefault.content= _thisDefault.content?_thisDefault.content:"<img src='"+loadImg+"' style='vertical-align:middle'/><span style='margin-left:10px'>加载中</span";
+                this.tag();
+            };
             this.prompt = function (val) {
                 var _this = this;
                 _thisDefault.content = "";
@@ -403,8 +408,8 @@
                             +"</div>"
                             +"<div class='content' >"
                                     +"<div class='tagimg'></div>"
-                                    +"<div class='contenttext' style='min-height:" + (_thisDefault.height - 70) + "px;overflow:hidden'>"
-                                          +"<table style='min-height:" + (_thisDefault.height - 70) + "px;'><tr><td>" + _thisDefault.content + "</td></tr></table>"
+                                    +"<div class='contenttext' style='height:" + (_thisDefault.height - 70) + "px;overflow:auto'>"
+                                          +"<table style='height:" + (_thisDefault.height - 70) + "px;'><tr><td>" + _thisDefault.content + "</td></tr></table>"
                                     +"</div>"
                             +"</div>"
                             +"<div class='footer' style='height:40px'>"
