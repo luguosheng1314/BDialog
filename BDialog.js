@@ -267,17 +267,25 @@
                 }, 50);
                 return _this;
             };
-            this.show = function (type) {
+             this.show = function (type) {
                 var _this = this;
                 var range = 100;
                 var intype = type.replace(/-In/i, "");
+                var dv = _this.currentOpen.style[intype];
+                if(/\d+%/.test(dv)){
+                            dv=dv.replace('%',"")/100;
+                            if(intype=="left"||intype=="bottom"){
+                                dv=+dv*cw;
+                            }else{
+                                dv=+dv*ch;
+                            }
+                }
                 switch (type) {
                     case "normal":
                         _this.currentOpen.style.display = "block";
                         break;
                     case "left-in":
                     case "top-in":
-                        var dv = _this.currentOpen.style[intype];
                         var si = setInterval(function () {
                             if (_this.currentOpen == null || range < 1) {
                                 clearInterval(si);
@@ -289,8 +297,6 @@
                         break;
                     case "right-in":
                     case "bottom-in":
-                        intype = intype == "right" ? "left" : "top";
-                        var dv = _this.currentOpen.style[intype];
                         var si = setInterval(function () {
                             if (_this.currentOpen == null || range < 1) {
                                 clearInterval(si);
