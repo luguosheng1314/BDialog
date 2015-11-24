@@ -552,7 +552,7 @@
     }
     BDialog.prototype.init.prototype = BDialog.prototype;
     try{
-        exports.BDialog=BDialog
+        module.exports=BDialog
     }catch(e){
          window.BDialog = BDialog;
     } 
